@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Posts</title>
+{% endblock %}
+
+
+
+{% block body %}
+<h1>All Posts</h1>
+<hr>
+<form action="/posts" method="POST">
+    Title: <input type="text" name="title" id="title">
+    <br>
+    Author: <input type="text" name="author" id="author">
+    <br>
+    Post: <input type="text" name="content" id="content">
+    <br>
+    <input type="submit" value="Post">
+</form>
+<hr>
+
+    {% for post in posts %}
+
+        <h2>{{ post.title }}</h2>
+
+        {% if post.author %}
+
+            <h2>By: {{ post.author }}</h2>
+        {% else %}
+            <h2>By: N/A</h2>
+        {% endif %}
+
+
+        <p>{{ post.content }}</p>
+        <a href='/posts/delete/{{post.id}}'>DELETE</a>
+        <a href='/posts/edit/{{post.id}}'>EDIT</a>
+        <hr>
+
+    {% endfor %}
+
+{% endblock %}
